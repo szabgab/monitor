@@ -1,0 +1,13 @@
+name: Monitor
+description: Monitor web sites and name resolutions
+inputs:
+  config:
+    description: 'List of config files, for example config/*.yaml'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Run
+      run: uv run monitor.py ${{ inputs.config }}
+      shell: bash
+
