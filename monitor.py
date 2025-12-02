@@ -1,4 +1,12 @@
 #!/usr/bin/env python
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "dnspython",
+#     "pyyaml",
+#     "requests",
+# ]
+# ///
 import requests
 import json
 import logging
