@@ -3,4 +3,4 @@ WORKDIR /opt/
 COPY . /opt/
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 RUN /root/.local/bin/uv sync
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/opt/entrypoint.sh"]
