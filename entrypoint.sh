@@ -5,5 +5,5 @@ root=$(dirname $0)
 
 echo "Root $root"
 
-uv run $root/monitor.py
+/root/.local/bin/uv run $root/monitor.py
 
