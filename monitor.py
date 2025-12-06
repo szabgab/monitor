@@ -134,7 +134,7 @@ class Monitor:
         start_process = time.time()
 
         if len(sys.argv) == 1:
-            exit(f"Usage: {sys.argv[0]} JSON_FILEs")
+            exit(f"Usage: {sys.argv[0]} CONFIG_FILEs (JSON or YAML)")
 
         filenames = sys.argv[1:]
         for filename in filenames:
