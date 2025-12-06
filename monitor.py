@@ -150,6 +150,11 @@ class Monitor:
             except Exception as err:
                 self.save_error(f'Exception {err} while reading config file {filename}')
                 continue
+
+            if 'sites' not in config:
+                self.save_error(f'The field "sites" is missing from file {filename}')
+                continue
+
             try:
                 for site in config["sites"]:
 
