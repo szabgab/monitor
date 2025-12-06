@@ -50,6 +50,24 @@ class Monitor:
             end = time.time()
             self.logger.info(f"elapsed time checking MX record: {end - start}")
 
+    def check_txt(self, site):
+        domain = site['txt']
+        self.logger.info(f"Domain: {domain} TXT records")
+        start = time.time()
+        try:
+            answers = dns.resolver.query(domain, 'TXT')
+            #self.logger.info(f"{answers}")
+            records = list(map(lambda rec: str(rec), dns.resolver.query(domain, 'TXT')))
+            self.logger.info(f"{records}")
+            if sorted(records) != sorted(site["expected"]):
+                self.save_error(f"Domain {domain} Expected values for TXT: {site['expected']}  received: {records}")
+        except dns.resolver.NoAnswer as err:
+            self.save_error(f"Domain {domain} Could not find MX record")
+        finally:
+            end = time.time()
+            self.logger.info(f"elapsed time checking MX record: {end - start}")
+
+
     def check_reverse_dns(self, site):
         ip = site['ip']
         expected = site['reverse']
@@ -162,6 +180,8 @@ class Monitor:
                         self.check_reverse_dns(site)
                     if 'mx' in site:
                         self.check_mx(site)
+                    if 'txt' in site:
+                        self.check_txt(site)
                     if 'url' in site:
                         self.check_url(site)
             except Exception as err:
