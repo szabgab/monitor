@@ -44,8 +44,8 @@ sites:
 2. Create a GitHub Workflow file:
 
 * This will run the workflow once an hour at the 42nd minute of the hour.
-* This will use the version that was tagged as `v1.00` This makes it safe and boring as the action does not change beneath your workflow.
-* Instead of `v1.00` you should probably use the most recent tag or you can live on the edge and use `main` instead.
+* This will use the version that was tagged as `v1.01` This makes it safe and boring as the action does not change beneath your workflow.
+* Instead of `v1.01` you should probably use the most recent tag or you can live on the edge and use `main` instead.
 * You either list the specific config files or you can use wild-cards. In the example below you can see both.
 
 ```yaml
@@ -69,12 +69,12 @@ jobs:
         uses: actions/checkout@v6
 
       # Pass the name of the individual config files
-      - uses: szabgab/monitor@v1.00
+      - uses: szabgab/monitor@v1.01
         with:
           config: sites/code-maven.com.yaml sites/szabgab.com.yaml
 
       # Pass wild-card should also work
-      - uses: szabgab/monitor@v1.00
+      - uses: szabgab/monitor@v1.01
         with:
           config: sites/*.yaml
 ```
