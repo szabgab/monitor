@@ -62,10 +62,27 @@ class Monitor:
             if sorted(records) != sorted(site["expected"]):
                 self.save_error(f"Domain {domain} Expected values for TXT: {site['expected']}  received: {records}")
         except dns.resolver.NoAnswer as err:
-            self.save_error(f"Domain {domain} Could not find MX record")
+            self.save_error(f"Domain {domain} Could not find TXT record")
         finally:
             end = time.time()
-            self.logger.info(f"elapsed time checking MX record: {end - start}")
+            self.logger.info(f"elapsed time checking TXT record: {end - start}")
+
+    def check_cname(self, site):
+        domain = site['cname']
+        self.logger.info(f"Domain: {domain} CNAME record")
+        start = time.time()
+        try:
+            answers = dns.resolver.resolve(domain, 'CNAME')
+            self.logger.info(f"{answers}")
+            records = list(map(lambda rec: str(rec), answers))
+            self.logger.info(f"{records}")
+            if sorted(records) != sorted(site["expected"]):
+                self.save_error(f"Domain {domain} Expected values for CNAME: {site['expected']}  received: {records}")
+        except dns.resolver.NoAnswer as err:
+            self.save_error(f"Domain {domain} Could not find CNAME record")
+        finally:
+            end = time.time()
+            self.logger.info(f"elapsed time checking CNAME record: {end - start}")
 
 
     def check_reverse_dns(self, site):
@@ -182,6 +199,8 @@ class Monitor:
                         self.check_mx(site)
                     if 'txt' in site:
                         self.check_txt(site)
+                    if 'cname' in site:
+                        self.check_cname(site)
                     if 'url' in site:
                         self.check_url(site)
             except Exception as err:

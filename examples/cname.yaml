@@ -1,0 +1,6 @@
+sites:
+  - cname: academy.code-maven.com
+    expected:
+      - s7.hostlocal.com.
+
+
