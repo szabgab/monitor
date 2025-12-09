@@ -9,7 +9,7 @@
 
 ```
 $ git push
-$ git tag -a v1.03 -m v1.03
+$ git tag -a v1.04 -m v1.04
 $ git push --tags
 ```
 
